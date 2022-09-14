@@ -40,27 +40,73 @@
         <h3>Gerenciamento de usuários</h3>
         <form action="">
             <div class="row">
-                <div class="col">
+                <div class="col-md">
                     <label class="form-label" for="nome" >Nome</label>
                     <input class="form-control" type="text" name="nome" id="nome">
                 </div>
-                <div class="col">
+                <div class="col-md">
                     <label class="form-label" for="email" >E-mail</label>
                     <input class="form-control" type="email" name="email" id="email">
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-md">
                     <label class="form-label" for="senha" >Senha</label>
                     <input class="form-control" type="password" name="senha" id="senha">
                 </div>
-                <div class="col">
+                <div class="col-md">
                     <label class="form-label" for="Csenha" >Confirmar Senha</label>
                     <input class="form-control" type="password" name="csenha" id="csenha">
                 </div>
             </div>
-            <button class="btn btn-success mt-2" type="submit">Cadastrar</button>
+            <div class="text-center">
+              <button class="btn btn-info btn-success mt-2 mb-2 medium col-2" type="submit">Cadastrar</button>
+            </div>
         </form>
+        <!-- datatable listagem de dados -->
+        <div class="border-rounded mt-4">
+          <table class="table table-info table-striped">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th colspan="2" class="text-center">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>MENOR</td>
+                <td>TERROR@GMAILPONTOCOUM</td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-sm btn-primary  w-50">Alterar</button>
+                </td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-sm btn-danger  w-50">Excluir</button>
+                </td>
+              </tr>
+              <tr>
+                <td>SMOUGOL</td>
+                <td>LOCO@GMAILPONTOCOUM</td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-sm btn-primary  w-50">Alterar</button>
+                </td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-sm btn-danger  w-50">Excluir</button>
+                </td>
+              </tr>
+              <tr>
+                <td>MENOR MART</td>
+                <td>MARTI@GMAILPONTOCOUM</td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-sm btn-primary  w-50">Alterar</button>
+                </td>
+                <td class="text-center">
+                  <button type="button" class="btn btn-sm btn-danger w-50">Excluir</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
     </div>
 
 
