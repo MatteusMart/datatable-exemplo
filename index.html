@@ -40,7 +40,7 @@
 
     <div class="container border mt-2 rounded">
         <h3>Gerenciamento de usuários</h3>
-        <form action="">
+        <form id="form-usuarios">
             <div class="row">
                 <div class="col-md">
                     <label class="form-label" for="nome" >Nome</label>
@@ -57,14 +57,14 @@
                     <input class="form-control" type="password" name="senha" id="senha">
                 </div>
                 <div class="col-md">
-                    <label class="form-label" for="Csenha" >Confirmar Senha</label>
-                    <input class="form-control" type="password" name="csenha" id="csenha">
+                    <label class="form-label" for="confirmar" >Confirmar Senha</label>
+                    <input class="form-control" type="password" name="confirmar" id="confirmar">
                 </div>
             </div>
             <div class="text-center">
-              <button class="btn btn-info btn-success mt-2 mb-2 medium col-2" type="submit">Cadastrar</button>
+              <button class="btn btn-info btn-success mt-2 mb-2 medium col-2" onclick="addUser()" type="button">Cadastrar</button>
             </div>
-        </form>
+        </form >
         <!-- datatable listagem de dados -->
         <div class="border-rounded mt-4">
           <table class="table table-info table-striped" id="tabela">
@@ -124,25 +124,8 @@
     <!-- requisito a importação do jquery -->
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
-    <script>
-      // document.ready define scripts JS que serão executados assim que a página for carregada , que a página estiver "pronta"
-    $(document).ready( function () {
-      $('#tabela').DataTable({
-        "language":{
-          url:'\\//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json'
-        }
-      });
-    } );
-
-    const addUser = () =>{
-      let nome = $('#nome').val()
-      // let nome = document.getElementById('nome').value
-      let email =$('#email').val()
-
-      let senha =$('#senha').val()
-      let confirmar =$('#confirmar').val()
-    }
-
-    </script>
+    
+    <!-- script com funções da página -->
+    <script src="assets/js/script.js"></script>
   </body>
 </html>
