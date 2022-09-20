@@ -2,10 +2,10 @@
 
 try{
      // dados da conexão com o BD
-     define('SERVIDOR','10.97.46.107');
-     define('USUARIO','mateus');
-     define('SENHA','123');
-     define('BASEDADOS','db_sistema_datatable_mateus');
+     define('SERVIDOR','localhost');
+     define('USUARIO','root');
+     define('SENHA','');
+     define('BASEDADOS','db_datatable');
 
      $con = new PDO("mysql:host=".SERVIDOR.";dbname=".BASEDADOS.";charset=utf8", USUARIO, SENHA);
      // set the PDO error mode to exception

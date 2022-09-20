@@ -1,43 +1,45 @@
 <?php
 
-    // incluide do arquivo de conexao
-    include 'include/conexao.php';
+include 'include/conexao.php';
 
-    try{
+try {
 
-        $nome      = $_POST['nome'];
-        $email     = $_POST['email'];
-        $senha     = $_POST['senha'];
-        $confirmar = $_POST['confirmar'];
+    $name = $_POST['nome'];
+    $email = $_POST['email'];
+    $password = $_POST['senha'];
+    $confirmPassword = $_POST['confirmar'];
 
-        if($senha != $confirmar){
-            // cria um array para armazenar a mensagem de erro
-            $retorno = array('Mensagem' =>'Senhas não conferem, veriifique e tente novamente');
-            // cria uma variavel que ira receber o array acima convertido em JSON
-            $json = json_encode($retorno, JSON_UNESCAPED_UNICODE);
+    if ($password != $confirmPassword) {
+        // Cria um array para armazenar a mensagem de erro
+        $return = array('message' => 'As senhas não conferem ');
 
-            // retorno em formato json
-            echo $json;
-            // encerra o script
-            exit;
-        }   
+        // Cria um json com relação ao array acima
+        $json = json_encode($return, JSON_UNESCAPED_UNICODE);
 
-        $sql = "INSERT INTO tb_cadastro (nome, email, senha) values ('$nome','$email','$senha')";
-
-        $comando = $conexao->prepare($sql);
-
-        $comando->execute();
-
-        $retorno = array('Mensagem' =>'Usuario adicionado com sucesso!');
-        // cria uma variavel que ira receber o array acima convertido em JSON
-        $json = json_encode($retorno, JSON_UNESCAPED_UNICODE);
-
-        // retorno em formato json
         echo $json;
-
-
-
-
-    }catch(PDOException $erro){
-       
+        exit();
     }
+
+    $sql = "INSERT INTO customer (`name`, email, `password`) VALUES ('$name', '$email', '$password')";
+
+    $stmt = $con->prepare($sql);
+
+    $stmt->execute();
+
+    $return = array('message' => 'Usuário cadastrado com sucesso');
+
+    // Cria um json com relação ao array acima
+    $json = json_encode($return, JSON_UNESCAPED_UNICODE);
+
+    echo $json;
+} catch (PDOException $erro) {
+    // tratamento de erro ou exceção
+    $retorno = array('Mensagem'=>$erro->getMessage());
+
+    $json = json_encode($retorno, JSON_UNESCAPED_UNICODE);
+
+    echo $json;
+
+}
+// fechar a conexão
+$con = null;

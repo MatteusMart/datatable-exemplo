@@ -19,4 +19,13 @@
             method: 'POST',
             body: dados
         })
-     }
+        .then((response)=>response.json())
+        .then((result)=>{
+          // aqui é tratado o retorno ao front 
+          Swal.fire({
+            title: 'Sucesso!!!!!',
+            text: result.message,
+            icon: 'success',
+          })
+     })   
+}   
