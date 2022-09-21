@@ -11,7 +11,8 @@ try {
 
     if ($password != $confirmPassword) {
         // Cria um array para armazenar a mensagem de erro
-        $return = array('message' => 'As senhas não conferem ');
+        $return = array('retorno'=>'erro',
+                        'message' => 'As senhas não conferem ');
 
         // Cria um json com relação ao array acima
         $json = json_encode($return, JSON_UNESCAPED_UNICODE);
@@ -26,7 +27,8 @@ try {
 
     $stmt->execute();
 
-    $return = array('message' => 'Usuário cadastrado com sucesso');
+    $return = array('retorno'=>'ok',
+                    'message' => 'Usuário cadastrado com sucesso');
 
     // Cria um json com relação ao array acima
     $json = json_encode($return, JSON_UNESCAPED_UNICODE);
@@ -34,7 +36,8 @@ try {
     echo $json;
 } catch (PDOException $erro) {
     // tratamento de erro ou exceção
-    $retorno = array('Mensagem'=>$erro->getMessage());
+    $retorno = array('retorno'=>'erro',
+                     'mensagem'=>$erro->getMessage());
 
     $json = json_encode($retorno, JSON_UNESCAPED_UNICODE);
 
