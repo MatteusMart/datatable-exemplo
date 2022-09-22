@@ -5,11 +5,11 @@
       listUser();
 
       // inicia a datatable
-      $('#tabela').DataTable({
-        "language":{
-          url:'\\//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json'
-        }
-      });
+      // $('#tabela').DataTable({
+      //   "language":{
+      //     url:'\\//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json'
+      //   }
+      // });
     } );
 
 
@@ -35,6 +35,8 @@
           // limpa os campos caso o retorno tenha sucesso
           // utilização do if ternario para a redução de escrita de codigo
           result.retorno == 'ok' ? $('#form-usuarios')[0].reset() : ''
+
+          result.retorno == 'ok' ? listUser() : ''
      })
       
 };
@@ -53,20 +55,34 @@
     .then((response)=>response.json())
     .then((result)=>{
       // aqui é tratado o retorno ao fronto
-      result.map(usuarios=>{
+      let datahora = moment().format('DD/MM/YY HH:mm')
+
+      $('#horario-atualizado').html(datahora)
+
+      // destroi a tabela que foi iniciada
+      $("#tabela").dataTable().fnDestroy();
+
+      // limpa os dados da tabela 
+      $('#tabela-dados').html('')
+
+      // função que irá molstrar as linhas da tabela , o map é um tipo de laço (for)
+      result.map(usuario=>{
       $('#tabela-dados').append(`
               <tr>
-                <td>${usuario.nome}</td>
+                <td>${usuario.name}</td>
                 <td>${usuario.email}</td>
                 <td class="text-center">
-                  <button type="button" class="btn btn-sm btn-primary  w-30">Alterar</button>
-                  <button type="button" class="btn btn-sm btn-danger  w-30">Excluir</button>
+                  <button type="button" class="btn btn-sm btn-primary  w-30"><i class="bi bi-pencil-square"></i></button>
+                  <button type="button" class="btn btn-sm btn-danger  w-30"><i class="bi bi-trash"></i></button>
                 </td>
               </tr>
               `)
-
-      })
-
-    })
+              })
+              $('#tabela').DataTable({
+                "language":{
+                  url:'//cdn.datatables.net/plug-ins/1.12.1/i18n/pt-BR.json'
+                }
+              });
+          })
 
   }

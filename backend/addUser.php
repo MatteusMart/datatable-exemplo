@@ -21,7 +21,7 @@ try {
         exit();
     }
 
-    $sql = "INSERT INTO customer (`name`, email, `password`) VALUES ('$name', '$email', '$password')";
+    $sql = "INSERT INTO tb_usuarios (`name`, email, `password`) VALUES ('$name', '$email', '$password')";
 
     $stmt = $con->prepare($sql);
 

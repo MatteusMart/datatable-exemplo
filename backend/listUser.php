@@ -7,7 +7,7 @@
         $sql = "SELECT * FROM tb_usuarios";
 
         // prepara a execuçao
-        $comando = $conexao->prepare($sql);
+        $comando = $con->prepare($sql);
 
         // executa o comando
         $comando->execute();
