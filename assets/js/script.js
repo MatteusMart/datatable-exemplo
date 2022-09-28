@@ -71,9 +71,15 @@
               <tr>
                 <td>${usuario.name}</td>
                 <td>${usuario.email}</td>
+                <td>${usuario.created_at}</td>
+                <td>
+                  <div class="form-check form-switch">
+                   <input class = "form-check-input" type="checkbox" role="switch" id="ativo" ${usuario.status == 1 ? 'checked' : ''} onchange="updateUserActive(${usuario.id})">
+                  </div>
+                </td>
                 <td class="text-center">
                   <button type="button" class="btn btn-sm btn-primary  w-30"><i class="bi bi-pencil-square"></i></button>
-                  <button type="button" class="btn btn-sm btn-danger  w-30"><i class="bi bi-trash"></i></button>
+                  <button type="button" class="btn btn-sm btn-danger  w-30"><i class="bi bi-trash" onclick="deleteUser(${usuario.id})"></i></button>
                 </td>
               </tr>
               `)
@@ -85,4 +91,47 @@
               });
           })
 
+          // <button type="button" class="btn btn-sm btn-${usuario.status == 1 ? 'success' : 'danger'}">${usuario.status == 1 ? 'Sim' : 'Não'}</button>
+  }
+
+  // função que altera o status de ativo de usuario
+
+  const updateUserActive = (id) => {
+    const result = fetch(`backend/updateUserActive.php`,{
+      method: "POST",
+      body : `id=${id}`,
+      headers:{
+        'content-type':'application/x-www-form-urlencoded'
+      }
+    })
+    .then((response) =>response.json()) //retorna uma promise
+    .then((result) => {
+        Swal.fire({
+          icon: result.retorno == 'ok' ? 'success' : 'error',
+          title: result.message,
+          showConfirmButton: false,
+          timer: 2000
+        })
+    });
+  }
+
+  const deleteUser = (id) => {
+    const result = fetch(`backend/deleteUser.php`,{
+      method: "POST",
+      body : `id=${id}`,
+      headers:{
+        'content-type':'application/x-www-form-urlencoded'
+      }
+    })
+    .then((response) =>response.json()) //retorna uma promise
+    .then((result) => {
+        Swal.fire({
+          icon: result.retorno == 'ok' ? 'success' : 'error',
+          title: result.message,
+          showConfirmButton: false,
+          timer: 2000
+        })
+        // recarregar a tebela de usuarios
+        listUser()
+    });
   }
