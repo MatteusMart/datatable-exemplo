@@ -15,6 +15,22 @@
 
     // função que add usuário
     const addUser = () => {
+      // valida se o nome foi preenchido
+      let = nome = $('#nome').val()
+
+      // valida se o nome foi preenchido com o js vanila
+
+      // let = nome = document.getElementById('nome').value
+
+      // if(nome == ''){
+      //   Swal.fire({
+      //     icon: 'error',
+      //     tittle: 'Atenção',
+      //     text: 'Preencha o nome!'
+      //   })
+      //   return
+      // }
+
         // captura todo o formulario
         let dados = new FormData($('#form-usuarios')[0]);
 
@@ -27,7 +43,7 @@
         .then((result)=>{
           // aqui é tratado o retorno ao front 
           Swal.fire({
-            title: result.retorno == 'ok' ? 'sucesso' : 'erro',
+            title: result.retorno == 'ok' ? 'sucesso' : 'error',
             text: result.message,
             icon: result.retorno == 'ok' ? 'success' : 'error'
           })
@@ -71,7 +87,7 @@
               <tr>
                 <td>${usuario.name}</td>
                 <td>${usuario.email}</td>
-                <td>${usuario.created_at}</td>
+                <td>${moment(usuario.created_at).format('DD/MM/YY HH:mm')}</td>
                 <td>
                   <div class="form-check form-switch">
                    <input class = "form-check-input" type="checkbox" role="switch" id="ativo" ${usuario.status == 1 ? 'checked' : ''} onchange="updateUserActive(${usuario.id})">
