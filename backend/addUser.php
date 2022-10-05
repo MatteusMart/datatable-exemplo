@@ -16,6 +16,9 @@ try {
 
     // exemplo simples de validaçao de preenchimento de variável
 
+    // executa a função que verifica se o email ja ta cadastrado
+    checkEmailUser($email);
+
     
 
     if ($password != $confirmPassword) {

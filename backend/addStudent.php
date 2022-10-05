@@ -1,5 +1,6 @@
 <?php
 
+// include arquivo função
 include 'functions.php';
 
 try {
