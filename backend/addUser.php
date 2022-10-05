@@ -4,10 +4,13 @@ include 'functions.php';
 
 try {
 
+    // define os caracteres que iremos remover dos campos preenchidos no form(replace)
+    $carac = array('(',')','-',' ','.');
+
     $name = $_POST['nome'];
     $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-    $cpf = $_POST['cpf'];
+    $telefone = str_replace($carac,"",$_POST['$telefone']);
+    $cpf = str_replace($carac,"",$_POST['$cpf']);
     $password = $_POST['senha'];
     $confirmPassword = $_POST['confirmar'];
 
