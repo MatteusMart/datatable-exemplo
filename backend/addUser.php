@@ -33,7 +33,11 @@ try {
         exit();
     }
 
-    $sql = "INSERT INTO tb_usuarios (`name`, email, `password`) VALUES ('$name', '$email', '$password')";
+    //criptografa a senha do usuario
+    // alguns algoritimo de criptografia sha1, md5, password hash php
+    $senha_cripto = sha1($senha); 
+
+    $sql = "INSERT INTO tb_usuarios (`name`, email, `password`) VALUES ('$name', '$email', '$senha_cripto')";
 
     $msg = "Usuário adicionado com sucesso!";
 
