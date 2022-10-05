@@ -6,11 +6,15 @@ try {
 
     $name = $_POST['nome'];
     $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+    $cpf = $_POST['cpf'];
     $password = $_POST['senha'];
     $confirmPassword = $_POST['confirmar'];
 
     validaCampoVazio($name,'nome');
     validaCampoVazio($email,'email');
+    validaCampoVazio($telefone,'telefone');
+    validaCampoVazio($cpf,'cpf');
     validaCampoVazio($password,'senha');
     validaCampoVazio($confirmPassword,'confirmar senha');
 
@@ -35,9 +39,9 @@ try {
 
     //criptografa a senha do usuario
     // alguns algoritimo de criptografia sha1, md5, password hash php
-    $senha_cripto = sha1($senha); 
+    $senha_cripto = sha1($password); 
 
-    $sql = "INSERT INTO tb_usuarios (`name`, email, `password`) VALUES ('$name', '$email', '$senha_cripto')";
+    $sql = "INSERT INTO tb_usuarios (`name`, email,`telefone`,`cpf`, `password`) VALUES ('$name', '$email','$telefone','$cpf', '$senha_cripto')";
 
     $msg = "Usuário adicionado com sucesso!";
 

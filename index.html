@@ -49,9 +49,20 @@
                     <label class="form-label" for="nome" >Nome</label>
                     <input class="form-control" type="text" name="nome" id="nome">
                 </div>
+                
                 <div class="col-md">
                     <label class="form-label" for="email" >E-mail</label>
                     <input class="form-control" type="email" name="email" id="email">
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-md">
+                    <label class="form-label" for="cpf" >CPF</label>
+                    <input class="form-control" type="text" name="cpf" id="cpf">
+                </div>
+                <div class="col-md">
+                    <label class="form-label" for="telefone" >Telefone</label>
+                    <input class="form-control" type="tel" name="telefone" id="telefone">
                 </div>
             </div>
             <div class="row">
@@ -59,10 +70,12 @@
                     <label class="form-label" for="senha" >Senha</label>
                     <input class="form-control" type="password" name="senha" id="senha">
                 </div>
+                
                 <div class="col-md">
                     <label class="form-label" for="confirmar" >Confirmar Senha</label>
                     <input class="form-control" type="password" name="confirmar" id="confirmar">
                 </div>
+           
             </div>
             <div class="text-center">
               <button class="btn btn-info btn-success mt-2 mb-2 medium col-2" onclick="addUser()" type="button"></i>Cadastrar <i class="bi bi-person-plus-fill"></i></button>
@@ -106,6 +119,8 @@
     <!-- importação do jquery -->
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     
+    <!-- importaçao do mask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     <!-- importação js datatable -->
     <!-- requisito a importação do jquery -->
