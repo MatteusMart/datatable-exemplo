@@ -93,7 +93,7 @@
                   </div>
                 </td>
                 <td class="text-center">
-                  <button type="button" class="btn btn-sm btn-primary   w-30" data-bs-toggle="modal" data-bs-target="#modal-editar-usuario"><i class="bi bi-pencil-square"></i></button>
+                  <button type="button" class="btn btn-sm btn-primary   w-30" onclick="listUserID(${usuario.id})"><i class="bi bi-pencil-square"></i></button>
                   <button type="button" class="btn btn-sm btn-danger  w-30"><i class="bi bi-trash" onclick="deleteUser(${usuario.id})"></i></button>
                 </td>
               </tr>
@@ -149,4 +149,30 @@
         // recarregar a tebela de usuarios
         listUser()
     });
+  }
+
+  const listUserID = (id) =>{
+    // lista os dados dos usuarios por id, para a alteraçao 
+    const result = fetch(`backend/listUserID.php`,{
+      method: "POST",
+      body : `id=${id}`,
+      headers:{
+        'content-type':'application/x-www-form-urlencoded'
+      }
+    })
+    .then((response) =>response.json()) //retorna uma promise
+    .then((result) => {
+
+      // preenche os dados do form de editar usuarios
+      $('#edita-nome').val(result[0].name)
+      $('#edita-email').val(result[0].email)
+      $('#edita-telefone').val(result[0].telefone)
+      $('#edita-cpf').val(result[0].cpf)
+
+      // exibe o modal apos receber os dados de ediçao
+      const modalEditar = new bootstrap.Modal('#modal-editar-usuario')
+
+      modalEditar.show()
+    });
+   
   }

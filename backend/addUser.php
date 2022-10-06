@@ -9,8 +9,8 @@ try {
 
     $name = $_POST['nome'];
     $email = $_POST['email'];
-    $telefone = str_replace($carac,"",$_POST['$telefone']);
-    $cpf = str_replace($carac,"",$_POST['$cpf']);
+    $telefone = str_replace($carac,"",$_POST['telefone']);
+    $cpf = str_replace($carac,"",$_POST['cpf']);
     $password = $_POST['senha'];
     $confirmPassword = $_POST['confirmar'];
 
