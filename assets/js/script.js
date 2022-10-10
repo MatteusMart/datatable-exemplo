@@ -169,6 +169,12 @@
       $('#edita-telefone').val(result[0].telefone)
       $('#edita-cpf').val(result[0].cpf)
 
+
+      $('#edita-telefone').val(result[0].cpf)
+      $('#edita-cpf').val(result[0].cpf)
+
+      
+
       // exibe o modal apos receber os dados de ediçao
       const modalEditar = new bootstrap.Modal('#modal-editar-usuario')
 
