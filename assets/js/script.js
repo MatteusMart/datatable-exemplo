@@ -182,3 +182,9 @@
     });
    
   }
+
+  const updateUser = () =>{
+    // igualzinho o adduser
+    // js igual a funçao addUser
+    // PHP igual o adduser.php
+  }
