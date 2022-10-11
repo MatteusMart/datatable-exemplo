@@ -1,5 +1,18 @@
 <?php
 
+
+// -----------------------------------
+
+$email_servidor = 'smtp.gmail.com';
+$email_porta= 465;
+$email_usuario = 'tecnico22asenac@gmail.com';
+$email_usuario_password = 'zvfarpeztyqgtrhe';
+$email_usuario_nome ='Técnico 22A';
+
+// destinatario-> quem ira receber o email
+// $destinatario_email = $_POST['email'];
+// $destinatario_nome = $_POST['nome'];
+
 /**
  * This example shows settings to use when sending via Google's Gmail servers.
  * This uses traditional id & password authentication - look at the gmail_xoauth.phps
@@ -7,9 +20,14 @@
  * The IMAP section shows how to save this message to the 'Sent Mail' folder using IMAP commands.
  */
 
+
+
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+
+function enviaEmail($destinatario_email, $destinatario_nome)
+{
 
 // usada apenas se estiver usando gerenciador de pacotes composer
 // require '../vendor/autoload.php';
@@ -36,7 +54,7 @@ $mail->SMTPDebug = SMTP::DEBUG_OFF;
 
 //Set the hostname of the mail server
 // endereço do servidor de envio de emails da empresa/provedor
-$mail->Host = 'smtp.gmail.com';
+$mail->Host = $email_servidor;
 //Use `$mail->Host = gethostbyname('smtp.gmail.com');`
 //if your network does not support SMTP over IPv6,
 //though this may cause issues with TLS
@@ -44,7 +62,7 @@ $mail->Host = 'smtp.gmail.com';
 //Set the SMTP port number:
 // - 465 for SMTP with implicit TLS, a.k.a. RFC8314 SMTPS or
 // - 587 for SMTP+STARTTLS
-$mail->Port = 465;
+$mail->Port = $email_porta;
 
 //Set the encryption mechanism to use:
 // - SMTPS (implicit TLS on port 465) or
@@ -55,23 +73,23 @@ $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = 'tecnico22asenac@gmail.com';
+$mail->Username = $email_usuario;
 
 //Password to use for SMTP authentication
-$mail->Password = 'zvfarpeztyqgtrhe';
+$mail->Password = $email_usuario_password;
 
 //Set who the message is to be sent from
 //Note that with gmail you can only use your account address (same as `Username`)
 //or predefined aliases that you have configured within your account.
 //Do not use user-submitted addresses in here
-$mail->setFrom('tecnico22asenac@gmail.com', 'Técnico 22A');
+$mail->setFrom($email_usuario, $email_usuario_nome);
 
 //Set an alternative reply-to address
 //This is a good place to put user-submitted addresses
-$mail->addReplyTo('tecnico22asenac@gmail.com', 'Técnico 22A');
+// $mail->addReplyTo($email_usuario, $email_usuario_nome);
 
 //Set who the message is to be sent to
-$mail->addAddress('ma123_vinicius@hotmail.com', 'Mateus');
+$mail->addAddress($destinatario_email);
 
 //Set the subject line
 $mail->Subject = 'teste PHPMailer';
@@ -89,9 +107,10 @@ $mail->Body = 'Teste de email utilizando o PHPMailer - corpo';
 
 //send the message, check for errors
 if (!$mail->send()) {
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
+    // echo 'Mailer Error: ' . $mail->ErrorInfo;
+    return false;
 } else {
-    echo 'Message sent!';
+    return true;
     //Section 2: IMAP
     //Uncomment these to save your message in the 'Sent Mail' folder.
     #if (save_mail($mail)) {
@@ -99,21 +118,5 @@ if (!$mail->send()) {
     #}
 }
 
-//Section 2: IMAP
-//IMAP commands requires the PHP IMAP Extension, found at: https://php.net/manual/en/imap.setup.php
-//Function to call which uses the PHP imap_*() functions to save messages: https://php.net/manual/en/book.imap.php
-//You can use imap_getmailboxes($imapStream, '/imap/ssl', '*' ) to get a list of available folders or labels, this can
-//be useful if you are trying to get this working on a non-Gmail IMAP server.
-function save_mail($mail)
-{
-    //You can change 'Sent Mail' to any other folder or tag
-    $path = '{imap.gmail.com:993/imap/ssl}[Gmail]/Sent Mail';
-
-    //Tell your server to open an IMAP connection using the same username and password as you used for SMTP
-    $imapStream = imap_open($path, $mail->Username, $mail->Password);
-
-    $result = imap_append($imapStream, $path, $mail->getSentMIMEMessage());
-    imap_close($imapStream);
-
-    return $result;
 }
+

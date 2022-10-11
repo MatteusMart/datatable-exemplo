@@ -2,6 +2,9 @@
 
 include 'functions.php';
 
+include 'envia-email.php';
+
+
 try {
 
     // define os caracteres que iremos remover dos campos preenchidos no form(replace)
@@ -49,6 +52,9 @@ try {
     $msg = "Usuário adicionado com sucesso!";
 
     insertUpdateDelete($sql,$msg);
+
+    // envia o email se o inset for executado
+    enviaEmail($senha,$nome);
 
 } catch (PDOException $erro) {
     pdocatch($erro);
