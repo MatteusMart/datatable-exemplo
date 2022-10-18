@@ -3,11 +3,11 @@
 
 // -----------------------------------
 
-$email_servidor = 'smtp.gmail.com';
-$email_porta= 465;
-$email_usuario = 'tecnico22asenac@gmail.com';
-$email_usuario_password = 'zvfarpeztyqgtrhe';
-$email_usuario_nome ='Técnico 22A';
+
+
+
+
+
 
 // destinatario-> quem ira receber o email
 // $destinatario_email = $_POST['email'];
@@ -26,8 +26,28 @@ $email_usuario_nome ='Técnico 22A';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
-function enviaEmail($destinatario_email, $destinatario_nome)
+function enviaEmail($destinatario_email,$destinatario_nome,$token)
+
 {
+    
+    $email_servidor = 'smtp.gmail.com';
+    $email_porta= 465;
+    $email_usuario = 'tecnico22asenac@gmail.com';
+    $email_usuario_password = 'zvfarpeztyqgtrhe';
+    $email_usuario_nome ='Técnico 22A';
+    $email_assunto = 'Sistema senac - Ative sua conta!'; 
+
+    $email_corpo = <<<EMAIL
+    <img src = "https://logodownload.org/wp-content/uploads/2014/10/senac-logo-4.png" width="200px"
+
+    <h3 style = "margin-top:15px">Olá $destinatario_nome, bem vindo ao Sistema Senac</h1>
+    <p>Ative o seu login, acessando o link abaixo:</p>
+    <a href="http://localhost/datatable-exemplo/backend/activeUser.php?token=$token">
+    Ativar acesso</a>
+    <small> Esse é um email automarico, não responda</small>
+    <small> Em caso de dúvidas, entre em contato: contato@sistema.com</small>
+
+EMAIL;
 
 // usada apenas se estiver usando gerenciador de pacotes composer
 // require '../vendor/autoload.php';
@@ -92,7 +112,7 @@ $mail->setFrom($email_usuario, $email_usuario_nome);
 $mail->addAddress($destinatario_email);
 
 //Set the subject line
-$mail->Subject = 'teste PHPMailer';
+$mail->Subject = $email_assunto;
 
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
@@ -100,7 +120,11 @@ $mail->Subject = 'teste PHPMailer';
 
 //Replace the plain text body with one created manually
 // $mail->AltBody = 'This is a plain-text message body';
-$mail->Body = 'Teste de email utilizando o PHPMailer - corpo';
+
+
+
+$mail->Body = $email_corpo;
+$mail->isHTML(true);
 
 //Attach an image file
 // $mail->addAttachment('images/phpmailer_mini.png');

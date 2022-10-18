@@ -53,8 +53,11 @@ try {
 
     insertUpdateDelete($sql,$msg);
 
+    // funçao que gera um token pra ativar a conta do usuario cadastrado
+    $token = geraTokenUsuario($email);
+
     // envia o email se o inset for executado
-    enviaEmail($senha,$nome);
+    enviaEmail($email,$name,$token);
 
 } catch (PDOException $erro) {
     pdocatch($erro);

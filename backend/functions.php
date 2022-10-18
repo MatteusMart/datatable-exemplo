@@ -79,7 +79,31 @@ function checkEmailUser($email){
     exit;
     }
 
+    function geraTokenUsuario($email){
+        $sql = "SELECT id FROM tb_usuarios WHERE email ='$email'";
 
+        $comando = $GLOBALS['con']->prepare($sql);
+
+        $comando->execute();
+
+        $dados = $comando->fetch(PDO::FETCH_ASSOC);
+
+        $idUsuario = $dados['id'];
+
+        // gera um token unico de ativação de conta de usuario
+        $token = md5(Uniqid($email));
+
+        $sql = "INSERT INTO tb_usuarios_token(fk_id_usuarios,
+        token) VALUES ($idUsuario,'$token')";
+
+        $comando = $GLOBALS['con']->prepare($sql);
+
+        $comando->execute();
+
+        // retorna o token gerado,para ser enviado por email
+        return $token;
+
+    }
 
 
 }
