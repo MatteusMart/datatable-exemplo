@@ -9,11 +9,15 @@
     // inputmask campo cpf
     $('#cpf').inputmask('999.999.999.99')
 
+    FechaLoader();
+
     } );
 
 
     // função que add usuário
     const addUser = () => {
+      // ao clicar no add usuarios o loader é carregado
+      AbreLoader();
       // valida se o nome foi preenchido
       let = nome = $('#nome').val()
 
@@ -40,6 +44,8 @@
         })
         .then((response)=>response.json())
         .then((result)=>{
+
+          FechaLoader();
           // aqui é tratado o retorno ao front 
           Swal.fire({
             title: result.retorno == 'ok' ? 'sucesso' : 'error',
@@ -188,3 +194,14 @@
     // js igual a funçao addUser
     // PHP igual o adduser.php
   }
+
+
+  // apos o carregamento completo da pagina o pré loader é fechado
+const FechaLoader = () => {
+  $('.preloader').fadeOut("slow", 0);
+}
+
+const AbreLoader = () => {
+
+  $('.preloader').fadeTo("slow", 1);
+}
